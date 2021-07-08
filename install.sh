@@ -33,5 +33,3 @@ else
   echo "${__required_line}" >> "${__sh_config}"
   echo "Codegem CLI installed successfully, please restart your shell"
 fi
-
-exit 0
