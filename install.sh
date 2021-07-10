@@ -2,14 +2,6 @@
 
 __shellname="$(basename ${SHELL})"
 
-if ! command -v brew &> /dev/null
-then
-  echo "installing homebrew"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-else
-  echo "homebrew is already installed"
-fi
-
 case "${__shellname}" in
   zsh)  __sh_config="${HOME}/.zshrc" ;;
   bash) __sh_config="${HOME}/.bashrc" ;;
@@ -18,6 +10,14 @@ case "${__shellname}" in
     \exit 1
     ;;
 esac
+
+if ! command -v brew &> /dev/null
+then
+  echo "installing homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+  echo "homebrew already installed"
+fi
 
 __base_repository_path="${HOME}/src/github.com/CodegemIO"
 
@@ -41,7 +41,7 @@ __required_line=". ~/src/github.com/CodegemIO/cli/cli.sh"
 
 if grep -Fxq "${__required_line}" "${__sh_config}"
 then
-  echo "codegem cli is already installed"
+  echo "codegem cli already installed"
 else
   echo "${__required_line}" >> "${__sh_config}"
   echo "codegem cli installed successfully, please restart your shell"
