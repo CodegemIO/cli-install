@@ -32,6 +32,11 @@ else
   cd cli && bundle install
 fi
 
+if ! [ -f "${__sh_config}" ]; then
+  echo "${__sh_config} not found, creating one"
+  touch "${__sh_config}"
+fi
+
 __required_line=". ~/src/github.com/CodegemIO/cli/cli.sh"
 
 if grep -Fxq "${__required_line}" "${__sh_config}"
