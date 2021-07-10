@@ -11,18 +11,24 @@ case "${__shellname}" in
     ;;
 esac
 
-if ! command -v brew &> /dev/null
-then
+if ! command -v brew &> /dev/null ; then
   echo "installing homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
   echo "homebrew already installed"
 fi
 
+if ! command -v blackbox_list_files &> /dev/null ; then
+  echo "installing blackbox"
+  brew install blackbox
+else
+  echo "blackbox already installed"
+fi
+
 __base_repository_path="${HOME}/src/github.com/CodegemIO"
 
 if [ -d "${__base_repository_path}/cli" ]; then
-  echo "codegem cli repository already cloned, skipping"
+  echo "codegem cli repository already cloned"
 else
   echo "cloning cli repository"
   mkdir -p "${__base_repository_path}"
